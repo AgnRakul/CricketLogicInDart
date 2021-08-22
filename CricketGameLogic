@@ -1,0 +1,119 @@
+import 'dart:io';
+import 'dart:math';
+
+void main() {
+  final range = Random();
+
+  while (true) {
+    stdout.write('ODD OR EVEN (O/E)');
+    final input = stdin.readLineSync();
+
+    if (input == 'O' || input == 'E') {
+      final result = range.nextInt(10); //
+      print(result);
+      if (result % 2 == 0) {
+        stdout.writeln('YOU LOSE');
+        stdout.writeln('AI Playing Now');
+      } else if (result % 2 == 1) {
+        stdout.writeln('YOU WIN');
+        stdout.writeln('Choose Bat or Bal');
+        final choice = stdin.readLineSync();
+        if (choice == 'Bat') {
+          stdout.writeln('You Choose To Bat');
+          var Userscore = 0;
+          var TotalOver = 2;
+          var wicket = 0;
+          for (int j = 1; j <= TotalOver; j++) {
+            for (int i = 1; i <= 6; i++) {
+              var userBall;
+              userBall = stdin.readLineSync();
+
+              userBall = int.parse(userBall);
+              var answer = userBall > 6 ? "noball" : "normal";
+              var UserBat = range.nextInt(7);
+              if (answer == "noball") {
+                stdout.writeln('Free Hit');
+                Userscore += UserBat + 1;
+                stdout.writeln('User Batting: $UserBat');
+                stdout.writeln("UserTotalScore $Userscore");
+                i--;
+              } else {
+                stdout.writeln('User Batting: $UserBat');
+                if (userBall == UserBat) {
+                  if (i == 1) {
+                    stdout.writeln('Duck Out');
+                  }
+                  wicket++;
+                  stdout.writeln('Out $wicket');
+                } else {
+                  if (UserBat == 6) {
+                    stdout.writeln('Wow Sixer!!!');
+                  }
+                  if (UserBat == 4) {
+                    stdout.writeln('Wow Four!!!');
+                  }
+
+                  Userscore += UserBat;
+                }
+                var OverCalc = j - 1;
+                var BallCalc = i;
+                stdout.writeln("Over $OverCalc.$BallCalc");
+                stdout.writeln("UserTotalScore $Userscore");
+              }
+            }
+            stdout.writeln('Over $j Ended');
+            stdout.writeln('Total Score $Userscore');
+            stdout.writeln('Total Wicket $wicket');
+          }
+        } else {
+          stdout.writeln('You Choose To Ball');
+          var Systemscore = 0;
+          var TotalOver = 2;
+          var wicket = 0;
+          for (int j = 1; j <= TotalOver; j++) {
+            for (int i = 1; i <= 6; i++) {
+              var userBall;
+              userBall = stdin.readLineSync();
+
+              userBall = int.parse(userBall);
+              var answer = userBall > 6 ? "noball" : "normal";
+              var systemBat = range.nextInt(7);
+              if (answer == "noball") {
+                stdout.writeln('Free Hit');
+                Systemscore += systemBat + 1;
+                stdout.writeln('System Batting: $systemBat');
+                stdout.writeln("SystemTotalScore $Systemscore");
+                i--;
+              } else {
+                stdout.writeln('System Batting: $systemBat');
+                if (userBall == systemBat) {
+                  if (i == 1) {
+                    stdout.writeln('Duck Out');
+                  }
+                  wicket++;
+                  stdout.writeln('Out $wicket');
+                } else {
+                  if (systemBat == 6) {
+                    stdout.writeln('Wow Sixer!!!');
+                  }
+                  if (systemBat == 4) {
+                    stdout.writeln('Wow Four!!!');
+                  }
+
+                  Systemscore += systemBat;
+                }
+                var OverCalc = j - 1;
+                var BallCalc = i;
+                stdout.writeln("Over $OverCalc.$BallCalc");
+                stdout.writeln("SystemTotalScore $Systemscore");
+              }
+            }
+            stdout.writeln('Over $j Ended');
+            stdout.writeln('Total Score $Systemscore');
+            stdout.writeln('Total Wicket $wicket');
+          }
+        }
+      }
+    }
+  }
+}
